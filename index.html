@@ -1,1 +1,212 @@
-<p>Hello world</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Lists</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+    }
+
+    h2 {
+      margin-top: 50px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .pdf-button {
+      padding: 8px 12px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pdf-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      width: 60%;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .modal h2 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #b52a37;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Pending Referrals / Transfers</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Age</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mason Lee</td>
+        <td>38</td>
+        <td>Room 101A</td>
+      </tr>
+      <tr>
+        <td>Isabella Brown</td>
+        <td>52</td>
+        <td>ER Bed 2</td>
+      </tr>
+      <tr>
+        <td>James Nguyen</td>
+        <td>44</td>
+        <td>Observation 6</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Accepted Referrals / Transfers</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Age</th>
+        <th>Location</th>
+        <th>Documents Signed</th>
+        <th>View PDFs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Emma Johnson</td>
+        <td>34</td>
+        <td>Room 204A</td>
+        <td>Yes</td>
+        <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+      </tr>
+      <tr>
+        <td>Liam Smith</td>
+        <td>47</td>
+        <td>Room 312B</td>
+        <td>No</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Ava Martinez</td>
+        <td>29</td>
+        <td>ER Bed 7</td>
+        <td>Yes</td>
+        <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+      </tr>
+      <tr>
+        <td>Noah Davis</td>
+        <td>56</td>
+        <td>ICU Room 3</td>
+        <td>No</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Sophia Wilson</td>
+        <td>42</td>
+        <td>Room 108</td>
+        <td>Yes</td>
+        <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="modal">
+    <div class="modal-content">
+      <h2><strong>Hospice Consent & Election Form</strong></h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel felis non justo volutpat euismod. 
+        Aliquam erat volutpat. Vivamus at quam sed ipsum ullamcorper tincidunt. Curabitur sagittis imperdiet eros, 
+        non fringilla sapien rutrum in. Aenean blandit placerat eros, nec congue purus ullamcorper vel. 
+        Donec in lorem eu magna fermentum accumsan a ut nunc. Morbi nec imperdiet est. Sed fringilla nulla ac nibh tempor, 
+        a elementum magna congue. Sed eget tortor in nisi pulvinar mattis. Integer tristique mauris ut diam gravida, 
+        id ullamcorper purus cursus.
+      </p>
+      <button class="close-btn" onclick="closePDF()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function showPDF() {
+      document.getElementById('pdfModal').style.display = 'block';
+    }
+
+    function closePDF() {
+      document.getElementById('pdfModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('pdfModal');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
