@@ -1,102 +1,244 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Patient Lists</title>
+  <title>Westlands Admissions Dashboard</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 40px;
-    }
+  font-family: Arial, sans-serif;
+  background-color: #88B6B4;
+  padding: 0;
+  margin: 0;
+}
 
-    h2 {
-      margin-top: 50px;
-    }
+.title-bar {
+  background-color: #636099;
+  color: white;
+  padding: 25px 0;
+  text-align: center;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-bottom: 40px;
-    }
+h1 {
+  margin: 0;
+  font-size: 32px;
+}
 
-    th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
+h2 {
+  margin-top: 40px;
+  padding-left: 40px;
+}
 
-    th {
-      background-color: #4CAF50;
-      color: white;
-    }
+.half-width-table {
+  width: 50%;
+  float: left;
+  margin: 20px 40px 40px 40px;
+}
 
-    tr:hover {
-      background-color: #f1f1f1;
-    }
+table {
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin: 0 40px 40px 40px;
+  width: calc(100% - 80px);
+}
 
-    .pdf-button {
-      padding: 8px 12px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
-    .pdf-button:hover {
-      background-color: #0056b3;
-    }
+th {
+  background-color: #636099;
+  color: white;
+}
 
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
-    }
+tr:hover {
+  background-color: #f1f1f1;
+}
 
-    .modal-content {
-      background-color: white;
-      margin: 10% auto;
-      padding: 20px;
-      width: 60%;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    }
+.pdf-button {
+  padding: 8px 12px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .modal h2 {
-      margin-top: 0;
-    }
+.pdf-button:hover {
+  background-color: #0056b3;
+}
 
-    .close-btn {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
 
-    .close-btn:hover {
-      background-color: #b52a37;
-    }
+.modal-content {
+  background-color: #fafafa;
+  margin: 10% auto;
+  padding: 20px;
+  width: 60%;
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  font-family: 'Courier New', monospace;
+  position: relative;
+  border: 1px solid #ccc;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #b52a37;
+}
+
+.clear {
+  clear: both;
+}
+
+.location-wakemed {
+  color: #D32F2F; /* Red */
+  font-weight: bold;
+}
+
+.location-unc {
+  color: #03A9F4; /* Light Blue */
+  font-weight: bold;
+}
+
+.location-duke {
+  color: #1E40AF; /* Royal Blue */
+  font-weight: bold;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 100%;
+  background-color: #3A3F58;
+  color: white;
+  padding-top: 60px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #50567a;
+}
+
+.main-content {
+  margin-left: 220px; /* leaves space for sidebar */
+  padding: 0px;
+}
+
+.patient-name {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.patient-name:hover {
+  background-color: #88B6B4;
+  color: white;
+}
+
+#fhirModal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.fhir-content {
+  background: #fff;
+  width: 60%;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.fhir-content h2 {
+  margin-top: 0;
+}
+
+.fhir-content ul {
+  padding-left: 20px;
+}
+
+.fhir-close {
+  background: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.fhir-close:hover {
+  background: #b52a37;
+}
+
+
   </style>
 </head>
 <body>
 
-  <h2>Pending Referrals / Transfers</h2>
+  <div class="sidebar">
+    <ul>
+      <li><strong>📋 Dashboard</strong></li>
+      <li>👤 Patients</li>
+      <li>🔁 Referrals</li>
+      <li>📁 Documents</li>
+      <li>🧪 Labs</li>
+      <li>📆 Appointments</li>
+      <li>⚙️ Settings</li>
+    </ul>
+  </div>
 
-  <table>
+<div class="main-content">
+  <div class="title-bar">
+  <h1>Westlands Admissions Dashboard</h1>
+  </div>
+
+
+  <h2>Pending Referrals & Transfers</h2>
+
+  <table class="half-width-table">
     <thead>
       <tr>
         <th>Patient Name</th>
@@ -106,24 +248,27 @@
     </thead>
     <tbody>
       <tr>
-        <td>Mason Lee</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Mason Lee</td>
         <td>38</td>
-        <td>Room 101A</td>
+        <td class="location-wakemed">WakeMed</td>
       </tr>
       <tr>
-        <td>Isabella Brown</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Isabella Brown</td>
         <td>52</td>
-        <td>ER Bed 2</td>
+        <td class="location-unc">UNC</td>
       </tr>
       <tr>
-        <td>James Nguyen</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">James Nguyen</td>
         <td>44</td>
-        <td>Observation 6</td>
+        <td>Westlands Field Patient</td>
       </tr>
     </tbody>
+
   </table>
 
-  <h2>Accepted Referrals / Transfers</h2>
+  <div class="clear"></div>
+
+  <h2>Accepted Referrals & Transfers</h2>
 
   <table>
     <thead>
@@ -137,58 +282,118 @@
     </thead>
     <tbody>
       <tr>
-        <td>Emma Johnson</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Emma Johnson</td>
         <td>34</td>
-        <td>Room 204A</td>
+        <td class="location-duke">Duke</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
       </tr>
       <tr>
-        <td>Liam Smith</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Liam Smith</td>
         <td>47</td>
-        <td>Room 312B</td>
+        <td class="location-wakemed">WakeMed</td>
         <td>No</td>
         <td></td>
       </tr>
       <tr>
-        <td>Ava Martinez</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Ava Martinez</td>
         <td>29</td>
-        <td>ER Bed 7</td>
+        <td class="location-unc">UNC</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
       </tr>
       <tr>
-        <td>Noah Davis</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Noah Davis</td>
         <td>56</td>
-        <td>ICU Room 3</td>
+        <td class="location-duke">Duke</td>
         <td>No</td>
         <td></td>
       </tr>
       <tr>
-        <td>Sophia Wilson</td>
+        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Sophia Wilson</td>
         <td>42</td>
-        <td>Room 108</td>
+        <td class="location-wakemed">WakeMed</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
       </tr>
     </tbody>
-  </table>
 
-  <!-- PDF Modal -->
-  <div id="pdfModal" class="modal">
-    <div class="modal-content">
-      <h2><strong>Hospice Consent & Election Form</strong></h2>
+  </table>
+  
+ <!-- FHIR Modal -->
+ <div id="fhirModal">
+  <div class="fhir-content">
+    <h2>FHIR Data for <span id="fhirPatientName">[Patient]</span></h2>
+    <p><strong>Components:</strong></p>
+    <ul>
+      <li>Vital Signs Panel</li>
+      <li>Problem List</li>
+      <li>Medication Summary</li>
+    </ul>
+    <p><strong>Resources:</strong></p>
+    <ul>
+      <li>Patient</li>
+      <li>Observation</li>
+      <li>AllergyIntolerance</li>
+      <li>Condition</li>
+      <li>Encounter</li>
+    </ul>
+    <p><strong>Identifiers:</strong></p>
+    <ul>
+      <li>MRN: 001234567</li>
+      <li>FHIR ID: pat-0459</li>
+      <li>Origin System: Epic@UNC</li>
+    </ul>
+    <button class="fhir-close" onclick="closeFHIR()">Close</button>
+  </div>
+</div>
+
+ 
+
+<!-- PDF Modal -->
+<div id="pdfModal" class="modal">
+  <div id="pdfContent" class="modal-content" style="position: relative; font-family: 'Courier New', monospace; background-color: #fafafa; border: 1px solid #ccc; box-shadow: inset 0 0 6px rgba(0,0,0,0.1);">
+    
+    <!-- Watermark -->
+    <div style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 60px; color: rgba(0,0,0,0.05); pointer-events: none; z-index: 0;">
+      SCANNED COPY
+    </div>
+
+    <!-- PDF Content -->
+    <div style="position: relative; z-index: 1;">
+      <h2 style="text-align:center; border-bottom: 1px solid #ccc; padding-bottom: 10px;">Hospice Consent & Election Form</h2>
+      
+      <p><strong>Patient Name:</strong> ____________________ <span style="margin-left: 40px;">Emma Johnson</span></p>
+      <p><strong>Date of Birth:</strong> ____________________ <span style="margin-left: 40px;">02/14/1989</span></p>
+      <p><strong>Medical Record #:</strong> ________________ <span style="margin-left: 40px;">MJ204A</span></p>
+      <p><strong>Primary Diagnosis:</strong> ________________ <span style="margin-left: 40px;">Stage IV Lung Cancer</span></p>
+
+      <hr style="margin: 20px 0; border: 0; border-top: 1px dashed #aaa;">
+
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel felis non justo volutpat euismod. 
-        Aliquam erat volutpat. Vivamus at quam sed ipsum ullamcorper tincidunt. Curabitur sagittis imperdiet eros, 
-        non fringilla sapien rutrum in. Aenean blandit placerat eros, nec congue purus ullamcorper vel. 
-        Donec in lorem eu magna fermentum accumsan a ut nunc. Morbi nec imperdiet est. Sed fringilla nulla ac nibh tempor, 
-        a elementum magna congue. Sed eget tortor in nisi pulvinar mattis. Integer tristique mauris ut diam gravida, 
-        id ullamcorper purus cursus.
+        I hereby elect hospice care under Medicare Part A (hospital insurance) for the treatment of my terminal illness and related conditions. 
+        I understand that by electing hospice care, I am waiving certain Medicare benefits for the treatment of my terminal illness.
       </p>
-      <button class="close-btn" onclick="closePDF()">Close</button>
+
+      <p><strong>Effective Date of Election:</strong> ____________________ <span style="margin-left: 40px;">04/20/2025</span></p>
+      <p><strong>Attending Physician Name:</strong> _______________ <span style="margin-left: 40px;">Dr. William Hart</span></p>
+      
+      <p style="margin-top: 40px;"><strong>Patient Signature:</strong> ______________________ <span style="margin-left: 40px;">[Signed]</span></p>
+      <p><strong>Date Signed:</strong> __________________________ <span style="margin-left: 40px;">04/21/2025</span></p>
+
+      <hr style="margin: 30px 0; border: 0; border-top: 1px dotted #bbb;">
+
+      <p style="font-size: 12px; color: #555;">Scanned by Westlands Admissions System • Doc ID #HX-89234</p>
+
+      <div style="margin-top: 30px;">
+        <button class="close-btn" onclick="closePDF()">Close</button>
+        <button class="pdf-button" onclick="printPDF()">Print</button>
+      </div>
     </div>
   </div>
+</div>
+</div>
+
 
   <script>
     function showPDF() {
@@ -205,8 +410,23 @@
         modal.style.display = "none";
       }
     }
+    
+    function showFHIR(patientName) {
+    document.getElementById("fhirPatientName").textContent = patientName;
+    document.getElementById("fhirModal").style.display = "block";
+ 		}
+
+  function closeFHIR() {
+    document.getElementById("fhirModal").style.display = "none";
+  	}
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("fhirModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+   	}
+  }
   </script>
 
 </body>
 </html>
-
