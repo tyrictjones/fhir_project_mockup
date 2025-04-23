@@ -219,6 +219,22 @@ tr:hover {
   background: #b52a37;
 }
 
+.eta-input {
+  width: 80px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.eta-input:focus {
+  outline: none;
+  border-color: #88B6B4;
+  background-color: #e0f7f7;
+}
+
 
   </style>
 </head>
@@ -284,6 +300,7 @@ tr:hover {
         <th>Location</th>
         <th>Documents Signed</th>
         <th>View PDFs</th>
+        <th>ETA</th>
       </tr>
     </thead>
     <tbody>
@@ -293,36 +310,42 @@ tr:hover {
         <td class="location-duke">Duke</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+        <td><input type="time" class="eta-input" placeholder="HH:MM"></td>
       </tr>
       <tr>
-        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Liam Smith</td>
+        <td class="patient-name" onclick="showFHIR('Liam Smith')">Liam Smith</td>
         <td>47</td>
         <td class="location-wakemed">WakeMed</td>
         <td>No</td>
         <td></td>
+        <td><input type="time" class="eta-input" placeholder="HH:MM"></td>
       </tr>
       <tr>
-        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Ava Martinez</td>
+        <td class="patient-name" onclick="showFHIR('Ava Martinez')">Ava Martinez</td>
         <td>29</td>
         <td class="location-unc">UNC</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+        <td><input type="time" class="eta-input" placeholder="HH:MM"></td>
       </tr>
       <tr>
-        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Noah Davis</td>
+        <td class="patient-name" onclick="showFHIR('Noah Davis')">Noah Davis</td>
         <td>56</td>
         <td class="location-duke">Duke</td>
         <td>No</td>
         <td></td>
+        <td><input type="time" class="eta-input" placeholder="HH:MM"></td>
       </tr>
       <tr>
-        <td class="patient-name" onclick="showFHIR('Emma Johnson')">Sophia Wilson</td>
+        <td class="patient-name" onclick="showFHIR('Sophia Wilson')">Sophia Wilson</td>
         <td>42</td>
         <td class="location-wakemed">WakeMed</td>
         <td>Yes</td>
         <td><button class="pdf-button" onclick="showPDF()">View PDF</button></td>
+        <td><input type="time" class="eta-input" placeholder="HH:MM"></td>
       </tr>
     </tbody>
+
 
   </table>
   
